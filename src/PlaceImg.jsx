@@ -8,7 +8,7 @@ export default function PlaceImg({ place, index = 0, className }) {
   return (
     <img
       className={className}
-      src={"https://airbnb-be-j2fa.onrender.com/uploads/" + place.photos[index]}
+      src={import.meta.env.VITE_IMAGE_URL + place.photos[index]}
       alt=""
     />
   );

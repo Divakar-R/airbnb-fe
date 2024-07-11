@@ -74,7 +74,7 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
             <div className="h-32 flex relative" key={link}>
               <img
                 className="rounded-2x w-full object-cover"
-                src={"https://airbnb-be-j2fa.onrender.com/uploads/" + link}
+                src={import.meta.env.VITE_IMAGE_URL + link}
                 alt=""
               />
               <button
