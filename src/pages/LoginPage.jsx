@@ -12,7 +12,7 @@ function LoginPage() {
   async function handleLoginSubmit(ev) {
     ev.preventDefault();
     try {
-      const { data } = await axios.post("/login1", { email, password });
+      const { data } = await axios.post("/login", { email, password });
       if (data?.success) {
         setUser(data?.data);
         alert("Login Successful");
