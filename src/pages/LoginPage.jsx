@@ -15,6 +15,8 @@ function LoginPage() {
       const { data } = await axios.post("/login", { email, password });
       if (data?.success) {
         setUser(data?.data);
+        window.localStorage.token = data?.token;
+
         alert("Login Successful");
         setRedirect(true);
       } else {

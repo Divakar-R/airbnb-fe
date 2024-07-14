@@ -13,9 +13,15 @@ function PlacePage() {
     if (!id) {
       return;
     }
-    axios.get(`/places/${id}`).then((response) => {
-      setPlace(response.data);
-    });
+    axios
+      .get(`/places/${id}`, {
+        headers: {
+          Authorization: "Bearer " + window.localStorage?.token,
+        },
+      })
+      .then((response) => {
+        setPlace(response.data);
+      });
   }, [id]);
 
   if (!place) return "";

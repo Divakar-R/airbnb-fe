@@ -7,9 +7,15 @@ import PlaceImg from "../PlaceImg";
 export default function PlacesPage() {
   const [places, setPlaces] = useState([]);
   useEffect(() => {
-    axios.get("/user-places").then(({ data }) => {
-      setPlaces(data);
-    });
+    axios
+      .get("/user-places", {
+        headers: {
+          Authorization: "Bearer " + window.localStorage?.token,
+        },
+      })
+      .then(({ data }) => {
+        setPlaces(data);
+      });
   }, []);
   return (
     <div>

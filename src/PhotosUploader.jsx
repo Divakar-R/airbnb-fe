@@ -7,9 +7,17 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
   async function addPhotoByLink(ev) {
     ev.preventDefault();
     try {
-      const { data: filename } = await axios.post("/upload-by-link", {
-        link: photoLink,
-      });
+      const { data: filename } = await axios.post(
+        "/upload-by-link",
+        {
+          link: photoLink,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + window.localStorage?.token,
+          },
+        }
+      );
       onChange((prev) => [...prev, filename]);
       setPhotoLink("");
     } catch (error) {
@@ -26,7 +34,10 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
 
     axios
       .post("/upload", data, {
-        headers: { "Content-type": "multipart/form-data" },
+        headers: {
+          "Content-type": "multipart/form-data",
+          Authorization: "Bearer " + window.localStorage?.token,
+        },
       })
       .then((response) => {
         const { data: filenames } = response;
