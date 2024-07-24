@@ -77,11 +77,19 @@ export default function PlacesFormPage() {
       await axios.put("/places", {
         id,
         ...placeData,
+      },{
+        headers: {
+          Authorization: "Bearer " + window.localStorage?.token,
+        },
       });
       setRedirect(true);
     } else {
       //new place
-      await axios.post("/places", placeData);
+      await axios.post("/places", placeData,{
+        headers: {
+          Authorization: "Bearer " + window.localStorage?.token,
+        },
+      });
       setRedirect(true);
     }
   }
