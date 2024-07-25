@@ -18,6 +18,7 @@ export default function PlacesFormPage() {
   const [maxGuests, setMaxGuests] = useState(1);
   const [price, setPrice] = useState(100);
   const [redirect, setRedirect] = useState(false);
+
   useEffect(() => {
     if (!id) {
       return;
@@ -42,6 +43,7 @@ export default function PlacesFormPage() {
         setPrice(data.price);
       });
   }, [id]);
+
   function inputHeader(text) {
     return <h2 className="text-2xl mt-4">{text}</h2>;
   }
@@ -58,6 +60,7 @@ export default function PlacesFormPage() {
       </>
     );
   }
+
   async function savePlace(ev) {
     ev.preventDefault();
     const placeData = {
@@ -73,19 +76,27 @@ export default function PlacesFormPage() {
       price,
     };
     if (id) {
-      //update
-      await axios.put("/places", {
-        id,
-        ...placeData,
-      },{
+      // Update existing place
+      await axios.put(`/places/${id}`, placeData, {
         headers: {
           Authorization: "Bearer " + window.localStorage?.token,
         },
       });
       setRedirect(true);
     } else {
-      //new place
-      await axios.post("/places", placeData,{
+      // Create new place
+      await axios.post("/places", placeData, {
+        headers: {
+          Authorization: "Bearer " + window.localStorage?.token,
+        },
+      });
+      setRedirect(true);
+    }
+  }
+
+  async function deletePlace() {
+    if (id) {
+      await axios.delete(`/places/${id}`, {
         headers: {
           Authorization: "Bearer " + window.localStorage?.token,
         },
@@ -97,12 +108,12 @@ export default function PlacesFormPage() {
   if (redirect) {
     return <Navigate to={"/account/places"} />;
   }
+
   return (
     <div>
       <AccountNav />
       <form onSubmit={savePlace}>
         {preInput("Title", " Title for your place. should be short and catchy")}
-
         <input
           type="text"
           value={title}
@@ -110,7 +121,6 @@ export default function PlacesFormPage() {
           placeholder="title , for example my lovely apt"
         />
         {preInput("Address", "Address for this place")}
-
         <input
           type="text"
           value={address}
@@ -119,29 +129,24 @@ export default function PlacesFormPage() {
         />
         {preInput("Photos", "more=better")}
         <PhotosUploader addedPhotos={addedPhotos} onChange={setAddedPhotos} />
-
         {preInput("Description", "description for this place")}
-
         <textarea
           value={description}
           onChange={(ev) => setDescription(ev.target.value)}
         />
         {preInput("Perks", " Select all the perks of your place")}
-
         <div className="grid mt-2 gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           <Perks selected={perks} onChange={setPerks} />
         </div>
-        {preInput("Extra info", "House rules,etc")}
-
+        {preInput("Extra info", "House rules, etc")}
         <textarea
           value={extraInfo}
           onChange={(ev) => setExtraInfo(ev.target.value)}
         />
         {preInput(
           "Check in & out times",
-          "add check in and out times, remember to habe some time window for cleaning the room between guest"
+          "add check in and out times, remember to have some time window for cleaning the room between guests"
         )}
-
         <div className="grid gap-2 grid-cols-2 md:grid-cols-4">
           <div>
             <h3 className="mt-2 -mb-1">Check in time</h3>
@@ -169,7 +174,6 @@ export default function PlacesFormPage() {
               onChange={(ev) => setMaxGuests(ev.target.value)}
             />
           </div>
-
           <div>
             <h3 className="mt-2 -mb-1">Price per night</h3>
             <input
@@ -179,7 +183,18 @@ export default function PlacesFormPage() {
             />
           </div>
         </div>
-        <button className="primary mt-4">Save</button>
+        <button className="primary mt-4" type="submit">
+          Save
+        </button>
+        {id && (
+          <button
+            className="primary mt-4 bg-red-500"
+            type="button"
+            onClick={deletePlace}
+          >
+            Delete
+          </button>
+        )}
       </form>
     </div>
   );
