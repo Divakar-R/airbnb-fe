@@ -6,9 +6,20 @@ function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   async function registerUser(ev) {
     ev.preventDefault();
+
+    // Basic validation
+    if (!name || !email || !password) {
+      setError("All fields are required.");
+      return;
+    }
+
+    // Reset error message if all fields are valid
+    setError("");
+
     try {
       await axios.post("/register", {
         name,
@@ -18,9 +29,10 @@ function RegisterPage() {
 
       alert("Registration successful. Now you can login");
     } catch (e) {
-      alert("Registeration failed. Please try again later");
+      alert("Registration failed. Please try again later");
     }
   }
+
   return (
     <div className="mt-4 grow flex items-center justify-around">
       <div className="mb-64">
@@ -44,6 +56,7 @@ function RegisterPage() {
             value={password}
             onChange={(ev) => setPassword(ev.target.value)}
           />
+          {error && <p style={{ color: "red" }}>{error}</p>}
           <button className="primary">Register</button>
           <div className="text-center py-2 text-gray-500">
             Already have an account?
