@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function RegisterPage() {
@@ -7,6 +7,8 @@ function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
   async function registerUser(ev) {
     ev.preventDefault();
@@ -27,9 +29,10 @@ function RegisterPage() {
         password,
       });
 
-      alert("Registration successful. Now you can login");
+      alert("Registration successful. Redirecting to login page...");
+      navigate("/login"); // Redirect to the login page
     } catch (e) {
-      alert("Registration failed. Please try again later");
+      alert("Registration failed. Please try again later.");
     }
   }
 
