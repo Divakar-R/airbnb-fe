@@ -8,12 +8,11 @@ function RegisterPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const navigate = useNavigate();
 
   async function registerUser(ev) {
     ev.preventDefault();
 
-    // Basic validation
     if (!name || !email || !password) {
       setError("All fields are required.");
       return;
@@ -29,8 +28,8 @@ function RegisterPage() {
         password,
       });
 
-      alert("Registration successful. Redirecting to login page...");
-      navigate("/login"); // Redirect to the login page
+      alert("Registration successful. Redirecting to login page.");
+      navigate("/login");
     } catch (e) {
       alert("Registration failed. Please try again later.");
     }
