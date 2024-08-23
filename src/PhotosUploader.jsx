@@ -33,7 +33,7 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
     }
 
     axios
-      .post("/upload", data, {
+      .post("https://airbnb-backend-vra7.onrender.com/upload", data, {
         headers: {
           "Content-type": "multipart/form-data",
           Authorization: "Bearer " + window.localStorage?.token,

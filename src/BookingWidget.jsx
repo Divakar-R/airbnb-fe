@@ -29,7 +29,7 @@ export default function BookingWidget({ place }) {
 
   async function bookThisPlace() {
     const response = await axios.post(
-      "/bookings",
+      "https://airbnb-backend-vra7.onrender.com//bookings",
       {
         checkIn,
         checkOut,

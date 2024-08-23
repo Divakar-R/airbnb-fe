@@ -9,7 +9,7 @@ export function UserContextProvider({ children }) {
   useEffect(() => {
     if (!user) {
       axios
-        .get("/profile", {
+        .get("https://airbnb-backend-vra7.onrender.com/profile", {
           headers: {
             Authorization: "Bearer " + window.localStorage?.token,
           },
