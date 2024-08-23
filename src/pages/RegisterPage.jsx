@@ -22,7 +22,7 @@ function RegisterPage() {
     setError("");
 
     try {
-      await axios.post("/register", {
+      await axios.post("https://airbnb-backend-vra7.onrender.com/register", {
         name,
         email,
         password,

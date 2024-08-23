@@ -13,7 +13,7 @@ export default function ProfilePage() {
   const activeSubpage = subpage || "profile";
 
   async function logout() {
-    await axios.post("/logout");
+    await axios.post("https://airbnb-backend-vra7.onrender.com/logout");
     window.localStorage.clear();
     setRedirect("/");
     setUser(null);

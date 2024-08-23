@@ -14,7 +14,7 @@ function PlacePage() {
       return;
     }
     axios
-      .get(`/places/${id}`, {
+      .get(`https://airbnb-backend-vra7.onrender.com/places/${id}`, {
         headers: {
           Authorization: "Bearer " + window.localStorage?.token,
         },

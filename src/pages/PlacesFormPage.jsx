@@ -77,30 +77,41 @@ export default function PlacesFormPage() {
     };
     if (id) {
       // Update existing place
-      await axios.put(`/places/${id}`, placeData, {
-        headers: {
-          Authorization: "Bearer " + window.localStorage?.token,
-        },
-      });
+      await axios.put(
+        `https://airbnb-backend-vra7.onrender.com/places/${id}`,
+        placeData,
+        {
+          headers: {
+            Authorization: "Bearer " + window.localStorage?.token,
+          },
+        }
+      );
       setRedirect(true);
     } else {
       // Create new place
-      await axios.post("/places", placeData, {
-        headers: {
-          Authorization: "Bearer " + window.localStorage?.token,
-        },
-      });
+      await axios.post(
+        "https://airbnb-backend-vra7.onrender.com/places",
+        placeData,
+        {
+          headers: {
+            Authorization: "Bearer " + window.localStorage?.token,
+          },
+        }
+      );
       setRedirect(true);
     }
   }
 
   async function deletePlace() {
     if (id) {
-      await axios.delete(`/places/${id}`, {
-        headers: {
-          Authorization: "Bearer " + window.localStorage?.token,
-        },
-      });
+      await axios.delete(
+        `https://airbnb-backend-vra7.onrender.com/places/${id}`,
+        {
+          headers: {
+            Authorization: "Bearer " + window.localStorage?.token,
+          },
+        }
+      );
       setRedirect(true);
     }
   }

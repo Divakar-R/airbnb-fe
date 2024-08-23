@@ -7,7 +7,7 @@ export default function IndexPage() {
 
   useEffect(() => {
     axios
-      .get("/places", {
+      .get("https://airbnb-backend-vra7.onrender.com/places", {
         headers: {
           Authorization: "Bearer " + window.localStorage?.token,
         },

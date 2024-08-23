@@ -8,7 +8,7 @@ export default function PlacesPage() {
   const [places, setPlaces] = useState([]);
   useEffect(() => {
     axios
-      .get("/user-places", {
+      .get("https://airbnb-backend-vra7.onrender.com/user-places", {
         headers: {
           Authorization: "Bearer " + window.localStorage?.token,
         },

@@ -12,7 +12,10 @@ function LoginPage() {
   async function handleLoginSubmit(ev) {
     ev.preventDefault();
     try {
-      const { data } = await axios.post("/login", { email, password });
+      const { data } = await axios.post(
+        "https://airbnb-backend-vra7.onrender.com/login",
+        { email, password }
+      );
       if (data?.success) {
         setUser(data?.data);
         window.localStorage.token = data?.token;

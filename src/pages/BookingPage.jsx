@@ -11,7 +11,7 @@ export default function BookingPage() {
   useEffect(() => {
     if (id) {
       axios
-        .get("/bookings", {
+        .get("https://airbnb-backend-vra7.onrender.com/bookings", {
           headers: {
             Authorization: "Bearer " + window.localStorage?.token,
           },
